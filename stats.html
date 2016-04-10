@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <title>VM Stats</title>
+    <meta charset="utf-8" />
+    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet" />
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <script src="../base1/jquery.js"></script>
+    <script src="../base1/cockpit.js"></script>
+    <script src="vmstats.js"></script>
+</head>
+<body>
+    <div id="libvirt" class="container-fluid page" hidden style="display: block">
+        <button id="libvirt-refresh">Refresh Stats</button>
+
+        <div class="panel panel-default" id="libvirt-stats">
+            <div class="panel-heading">
+                <span>VM Stats</span>
+            </div>
+            <div class="table-overflow-wrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                    <tbody></tbody>
+               </table>
+           </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -4,6 +4,10 @@
     "menu": {
         "index": {
             "label": "Virtual Machines"
+        },
+        "stats": {
+            "label": "VM Stats",
+            "path": "stats.html"
         }
     },
 

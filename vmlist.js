@@ -48,7 +48,7 @@ $(() => {
         var $td_state = $("<td />");
 
         var $start = $("<button class=\"libvirt-action libvirt-action-start\">Start</button>");
-        var $stop = $("<button class=\"libvirt-action libvirt-action-stop\">Shutdown</button>");
+        var $stop = $("<button class=\"libvirt-action libvirt-action-shutdown\">Shutdown</button>");
         var $td_actions = $("<td />").append($start, $stop);
 
         var $tr = $("<tr class=\"libvirt-domain\" />").append($td_uuid, $td_id, $td_name, $td_state, $td_actions).data("uuid", uuid);
@@ -93,24 +93,33 @@ $(() => {
     }
 
     $list.on("click", ".libvirt-action-start", function () {
-        var uuid = $(this).closest("tr").data("uuid");
+        var $tr = $(this).closest("tr").removeClass("libvirt-domain-stopped");
+        var uuid = $tr.data("uuid");
         start_domain(uuid);
     });
 
     $list.on("click", ".libvirt-action-shutdown", function () {
-        var uuid = $(this).closest("tr").data("uuid");
+        var $tr = $(this).closest("tr").removeClass("libvirt-domain-started");
+        var uuid = $tr.data("uuid");
         shutdown_domain(uuid);
     });
 
-    spawn_proc(["virsh", "list", "--all", "--uuid"], (output) => {
-        var uuids = output.split("\n").filter((value) => {
-            return value !== "";
-        });
+    function refresh_vms() {
+        $tbody.empty();
 
-        for (var i = 0; i < uuids.length; i++) {
-            add_domain(uuids[i], $tbody);
-        }
-    }, () => {
-        alert("Failed to get list of VMs");
-    });
+        spawn_proc(["virsh", "list", "--all", "--uuid"], (output) => {
+            var uuids = output.split("\n").filter((value) => {
+                return value !== "";
+            });
+
+            for (var i = 0; i < uuids.length; i++) {
+                add_domain(uuids[i], $tbody);
+            }
+        }, () => {
+            alert("Failed to get list of VMs");
+        });
+    }
+
+    refresh_vms();
+    $("#libvirt-refresh").on("click", refresh_vms);
 });

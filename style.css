@@ -6,6 +6,14 @@
     display: block;
 }
 
-.libvirt-domain-started .libvirt-action-stop {
+.libvirt-domain-started .libvirt-action-shutdown {
     display: block;
+}
+
+.table-overflow-wrap {
+    overflow-x: auto;
+}
+
+#libvirt-refresh {
+    margin: 0 0 1em 0;
 }
