@@ -1,0 +1,11 @@
+.libvirt-domain .libvirt-action {
+    display: none;
+}
+
+.libvirt-domain-stopped .libvirt-action-start {
+    display: block;
+}
+
+.libvirt-domain-started .libvirt-action-stop {
+    display: block;
+}
